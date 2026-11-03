@@ -42,11 +42,15 @@ jobs:
             -o trunk/tools/go/go1.15.2.linux-amd64.tar.gz
           echo "b49fda1ca29a1946d6bb2a5a6982cf07ccd2aba849289508ee0f9918f6bb4552  trunk/tools/go/go1.15.2.linux-amd64.tar.gz" | sha256sum -c -
 
-      - name: Prepare htop 3.0.2 archive
+      - name: Prepare htop 3.0.2 source
         run: |
           curl -fL https://github.com/htop-dev/htop/archive/refs/tags/3.0.2.tar.gz \
             -o trunk/user/htop/htop-3.0.2.tar.gz
-          tar -tzf trunk/user/htop/htop-3.0.2.tar.gz | head
+          rm -rf trunk/user/htop/htop-3.0.2
+          tar -xzf trunk/user/htop/htop-3.0.2.tar.gz -C trunk/user/htop
+          cd trunk/user/htop/htop-3.0.2
+          ./autogen.sh
+          test -x ./configure
 
       - name: Build RM2100 firmware
         shell: bash
