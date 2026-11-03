@@ -35,6 +35,13 @@ jobs:
           cd toolchain-mipsel
           sh dl_toolchain.sh
 
+      - name: Prepare Go 1.15.2 archive
+        run: |
+          mkdir -p trunk/tools/go
+          curl -fL https://go.dev/dl/go1.15.2.linux-amd64.tar.gz \
+            -o trunk/tools/go/go1.15.2.linux-amd64.tar.gz
+          echo "b49fda1ca29a1946d6bb2a5a6982cf07ccd2aba849289508ee0f9918f6bb4552  trunk/tools/go/go1.15.2.linux-amd64.tar.gz" | sha256sum -c -
+
       - name: Build RM2100 firmware
         shell: bash
         run: |
