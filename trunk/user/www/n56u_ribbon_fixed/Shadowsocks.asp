@@ -781,7 +781,12 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 				document.getElementById("v2_tls").checked =  document.getElementById("v2_tls") != 0;
 				document.getElementById("ssp_tls_host").value = getProperty(ss, 'tls_host', '');
 			} else if (type == "socks5") {
-				//
+				var user = getProperty(ss, 'server_user', '');
+				var pwd = getProperty(ss, 'server_pwd', '');
+				document.getElementById("s5_username").value = user;
+				document.getElementById("s5_password").value = pwd;
+				document.getElementById("s5_aut").checked = user !== '';
+				document.getElementById("s5_aut").value = user !== '' ? 1 : 0;
 			}
 			switch_ss_type();
 			$j("#vpnc_settings").fadeIn(200);
